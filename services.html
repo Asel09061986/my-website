@@ -1,47 +1,157 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Services - Assel Creative</title>
+    <link rel="icon" href="favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Услуги - Assel Creative</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
             scroll-behavior: smooth;
         }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #8a2be2 0%, #4169e1 100%);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #8a2be2;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .active::after {
+            width: 100%;
+        }
+        
+        .modal {
+            transition: opacity 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .animate-fadeIn {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .calendar-day {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .calendar-day:hover:not(.calendar-day-disabled) {
+            background-color: #e9d5ff;
+            color: #6b21a8;
+        }
+        
+        .calendar-day-selected {
+            background-color: #8b5cf6 !important;
+            color: white !important;
+        }
+        
+        .calendar-day-disabled {
+            color: #d1d5db;
+            cursor: not-allowed;
+        }
+        
+        .contact-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .contact-icon:hover {
+            transform: translateY(-5px);
+        }
+        
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: scale(1.2);
+        }
     </style>
 </head>
+
 <body class="bg-gray-50">
-
-<header class="fixed w-full bg-white shadow-md z-50">
-    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-        <a href="index.html" class="flex items-center">
+    <header class="fixed w-full bg-white shadow-md z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center relative">
+            <a href="index.html" class="flex items-center">
             <span class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600">Assel Creative</span>
-        </a>
+            </a>
 
-        <div class="hidden md:flex space-x-8">
-            <a href="index.html" class="nav-link text-gray-800 hover:text-purple-600 transition">Главная</a>
-            <a href="about.html" class="nav-link text-gray-800 hover:text-purple-600 transition">Обо мне</a>
-            <a href="courses.html" class="nav-link text-gray-800 hover:text-purple-600 transition">Курсы</a>
-            <a href="masterclass.html" class="nav-link text-gray-800 hover:text-purple-600 transition">Мастер-классы</a>
-            <a href="services.html" class="nav-link text-gray-800 hover:text-purple-600 transition">Услуги</a>
-            <a href="contacts.html" class="nav-link text-gray-800 hover:text-purple-600 transition">Контакты</a>
-        </div>
+            <!-- Desktop menu -->
+            <div class="hidden md:flex space-x-8">
+            <a href="index.html" class="nav-link text-gray-800 hover:text-purple-600 transition-colors duration-300 ease-in-out">Главная</a>
+            <a href="about.html" class="nav-link text-gray-800 hover:text-purple-600 transition-colors duration-300 ease-in-out">Обо мне</a>
+            <a href="courses.html" class="nav-link text-gray-800 hover:text-purple-600 transition-colors duration-300 ease-in-out">Курсы</a>
+            <a href="masterclass.html" class="nav-link text-gray-800 hover:text-purple-600 transition-colors duration-300 ease-in-out">Мастер-классы</a>
+            <a href="services.html" class="nav-link text-gray-800 hover:text-purple-600 transition-colors duration-300 ease-in-out">Услуги</a>
+            <a href="contacts.html" class="nav-link text-gray-800 hover:text-purple-600 transition-colors duration-300 ease-in-out">Контакты</a>
+            </div>
 
-        <button id="mobile-menu-button" class="md:hidden text-gray-800 focus:outline-none">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                 xmlns="http://www.w3.org/2000/svg">
+            <!-- Mobile menu button -->
+            <button id="mobile-menu-button" class="md:hidden text-gray-800 focus:outline-none z-20 relative">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M4 6h16M4 12h16m-7 6h7"></path>
+                    d="M4 6h16M4 12h16m-7 6h7" />
             </svg>
-        </button>
-    </div>
-</header>
+            </button>
+
+            <!-- Mobile menu -->
+            <div id="mobile-menu"
+                class="md:hidden hidden absolute top-full right-0 w-full bg-white shadow-lg flex flex-col space-y-4 p-4 z-10">
+            <a href="index.html" class="text-gray-800 hover:text-purple-600 transition">Главная</a>
+            <a href="about.html" class="text-gray-800 hover:text-purple-600 transition">Обо мне</a>
+            <a href="courses.html" class="text-gray-800 hover:text-purple-600 transition">Курсы</a>
+            <a href="masterclass.html" class="text-gray-800 hover:text-purple-600 transition">Мастер-классы</a>
+            <a href="services.html" class="text-gray-800 hover:text-purple-600 transition">Услуги</a>
+            <a href="contacts.html" class="text-gray-800 hover:text-purple-600 transition">Контакты</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Скрипт -->
+    <script>
+    const menuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+    </script>
 
 <main class="pt-24 px-4 container mx-auto">
-
     <section id="services" class="py-8 bg-gray-50">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-4 text-gray-800">Услуги</h2>
@@ -209,7 +319,7 @@
                 </div>
                 <div class="mt-8 text-center">
                     <p class="text-gray-600 mb-4">Все работы официально через ИП. Качество и индивидуальный подход гарантирую!</p>
-                    <button id="contact-btn" class="bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 px-8 rounded-lg transition">Связаться для консультации</button>
+                    <a href="contacts.html" id="contact-btn" class="bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 px-8 rounded-lg transition inline-block text-center">Связаться для консультации</a>                      
                 </div>
             </div>
         </div>
