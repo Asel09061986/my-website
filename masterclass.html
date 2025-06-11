@@ -1,42 +1,166 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Masterclass - Assel Creative</title>
+    <link rel="icon" href="favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мастер-классы - Assel Creative</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
     <style>
-        body { font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #8a2be2 0%, #4169e1 100%);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #8a2be2;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .active::after {
+            width: 100%;
+        }
+        
+        .modal {
+            transition: opacity 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .animate-fadeIn {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .calendar-day {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .calendar-day:hover:not(.calendar-day-disabled) {
+            background-color: #e9d5ff;
+            color: #6b21a8;
+        }
+        
+        .calendar-day-selected {
+            background-color: #8b5cf6 !important;
+            color: white !important;
+        }
+        
+        .calendar-day-disabled {
+            color: #d1d5db;
+            cursor: not-allowed;
+        }
+        
+        .contact-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .contact-icon:hover {
+            transform: translateY(-5px);
+        }
+        
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: scale(1.2);
+        }
+
+        .marked-date {
+            background-color: rgba(168, 85, 247, 0.2); /* светло-фиолетовый фон */
+            border: 2px solid #a855f7; /* фиолетовый */
+            border-radius: 9999px;
+            color: #6b21a8; /* насыщенный фиолетовый текст */
+            font-weight: 600;
+        }
+
     </style>
 </head>
-<body class="bg-gray-50">
 
-<header class="fixed w-full bg-white shadow-md z-50">
-    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-        <a href="index.html" class="flex items-center">
+<body class="bg-gray-50">
+    <header class="fixed w-full bg-white shadow-md z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center relative">
+            <a href="index.html" class="flex items-center">
             <span class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-600">Assel Creative</span>
-        </a>
-        
-        <div class="hidden md:flex space-x-8">
-            <a href="index.html" class="nav-link text-gray-800 hover:text-purple-600 transition">Главная</a>
-            <a href="about.html" class="nav-link text-gray-800 hover:text-purple-600 transition">Обо мне</a>
-            <a href="courses.html" class="nav-link text-gray-800 hover:text-purple-600 transition">Курсы</a>
-            <a href="masterclass.html" class="nav-link text-gray-800 hover:text-purple-600 transition">Мастер-классы</a>
-            <a href="services.html" class="nav-link text-gray-800 hover:text-purple-600 transition">Услуги</a>
-            <a href="contacts.html" class="nav-link text-gray-800 hover:text-purple-600 transition">Контакты</a>
-        </div>
-        
-        <button id="mobile-menu-button" class="md:hidden text-gray-800 focus:outline-none">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </a>
+
+            <!-- Desktop menu -->
+            <div class="hidden md:flex space-x-8">
+            <a href="index.html" class="nav-link text-gray-800 hover:text-purple-600 transition-colors duration-300 ease-in-out">Главная</a>
+            <a href="about.html" class="nav-link text-gray-800 hover:text-purple-600 transition-colors duration-300 ease-in-out">Обо мне</a>
+            <a href="courses.html" class="nav-link text-gray-800 hover:text-purple-600 transition-colors duration-300 ease-in-out">Курсы</a>
+            <a href="masterclass.html" class="nav-link text-gray-800 hover:text-purple-600 transition-colors duration-300 ease-in-out">Мастер-классы</a>
+            <a href="services.html" class="nav-link text-gray-800 hover:text-purple-600 transition-colors duration-300 ease-in-out">Услуги</a>
+            <a href="contacts.html" class="nav-link text-gray-800 hover:text-purple-600 transition-colors duration-300 ease-in-out">Контакты</a>
+            </div>
+
+            <!-- Mobile menu button -->
+            <button id="mobile-menu-button" class="md:hidden text-gray-800 focus:outline-none z-20 relative">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 6h16M4 12h16m-7 6h7" />
             </svg>
-        </button>
-    </div>
-</header>
+            </button>
+
+            <!-- Mobile menu -->
+            <div id="mobile-menu"
+                class="md:hidden hidden absolute top-full right-0 w-full bg-white shadow-lg flex flex-col space-y-4 p-4 z-10">
+            <a href="index.html" class="text-gray-800 hover:text-purple-600 transition">Главная</a>
+            <a href="about.html" class="text-gray-800 hover:text-purple-600 transition">Обо мне</a>
+            <a href="courses.html" class="text-gray-800 hover:text-purple-600 transition">Курсы</a>
+            <a href="masterclass.html" class="text-gray-800 hover:text-purple-600 transition">Мастер-классы</a>
+            <a href="services.html" class="text-gray-800 hover:text-purple-600 transition">Услуги</a>
+            <a href="contacts.html" class="text-gray-800 hover:text-purple-600 transition">Контакты</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Скрипт -->
+    <script>
+    const menuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+    </script>
 
 <main class="pt-24">
-
     <!-- Masterclass Section -->
     <section id="masterclass" class="py-8 bg-white">
         <div class="container mx-auto px-4">
@@ -58,10 +182,9 @@
                                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                     </svg>
-                                    <span>25 мая 2023, 18:00</span>
+                                    <span>10 июня 2025, 18:00</span>
                                 </div>
                                 <a href="contacts.html" class="bg-white text-purple-700 hover:bg-gray-100 font-medium py-2 px-6 rounded-lg transition w-full text-center block">Забронировать место</a>
-
                             </div>
                             
                             <div class="bg-white bg-opacity-20 rounded-lg p-6">
@@ -74,10 +197,9 @@
                                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                     </svg>
-                                    <span>10 июня 2023, 15:00</span>
+                                    <span>15 июня 2025, 15:00</span>
                                 </div>
                                 <a href="contacts.html" class="bg-white text-purple-700 hover:bg-gray-100 font-medium py-2 px-6 rounded-lg transition w-full text-center block">Забронировать место</a>
-
                             </div>
                         </div>
                         
@@ -91,7 +213,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                                             </svg>
                                         </button>
-                                        <h5 id="current-month" class="text-gray-700 font-medium">Май 2023</h5>
+                                        <h5 id="current-month" class="text-gray-700 font-medium">Июль 2025</h5>
                                         <button id="next-month" class="text-purple-600 hover:text-purple-800">
                                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -126,8 +248,70 @@
             </div>
         </div>
     </section>
-
 </main>
+
+<script>
+    const calendarDaysEl = document.getElementById("calendar-days");
+    const currentMonthEl = document.getElementById("current-month");
+    const prevBtn = document.getElementById("prev-month");
+    const nextBtn = document.getElementById("next-month");
+  
+    const markedDates = {
+      // формат: '2025-07-15': true (можно подсвечивать любые)
+      '2025-06-10': true,
+      '2025-06-15': true,
+      '2025-06-20': true,
+    };
+  
+    let currentDate = new Date();
+  
+    function renderCalendar(date) {
+      const year = date.getFullYear();
+      const month = date.getMonth();
+      const firstDayOfMonth = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+  
+      const startDay = (firstDayOfMonth + 6) % 7; // чтобы неделя начиналась с понедельника
+      const monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+      currentMonthEl.textContent = `${monthNames[month]} ${year}`;
+  
+      calendarDaysEl.innerHTML = "";
+  
+      // Пустые ячейки до 1-го числа
+      for (let i = 0; i < startDay; i++) {
+        const empty = document.createElement("div");
+        calendarDaysEl.appendChild(empty);
+      }
+  
+      // Дни месяца
+      for (let day = 1; day <= daysInMonth; day++) {
+        const dayEl = document.createElement("div");
+        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+  
+        dayEl.textContent = day;
+        dayEl.className = "py-2 text-gray-800 rounded-full cursor-default hover:bg-purple-100 transition";
+  
+        if (markedDates[dateStr]) {
+          dayEl.classList.add("marked-date");
+        }
+  
+        calendarDaysEl.appendChild(dayEl);
+      }
+    }
+  
+    prevBtn.addEventListener("click", () => {
+      currentDate.setMonth(currentDate.getMonth() - 1);
+      renderCalendar(currentDate);
+    });
+  
+    nextBtn.addEventListener("click", () => {
+      currentDate.setMonth(currentDate.getMonth() + 1);
+      renderCalendar(currentDate);
+    });
+  
+    renderCalendar(currentDate);
+  </script>
+  
 
 <footer class="bg-white py-6 mt-16 border-t border-gray-200">
     <div class="container mx-auto px-4 text-center text-gray-600">
